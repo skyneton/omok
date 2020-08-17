@@ -1,0 +1,275 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=750px, initial-scale=1.0">
+    <title>오목</title>
+    <script src="scripts/board.js"></script>
+    <script src="scripts/game.js"></script>
+    <script src="scripts/botAI.js"></script>
+    <script src="scripts/botAI2.js"></script>
+    <script src="scripts/socket.io.js"></script>
+    <script src="scripts/client.js"></script>
+    <script src="scripts/online.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+</head>
+<body>
+    <div>
+        <header style="width: 100%;">
+            <input type="button" value="싱글 플레이" id="nav1" onclick="singleModeChange()">
+            <input type="button" value="멀티 플레이" id="nav2" onclick="multiModeChange()">
+            <input type="button" value="방 만들기" id="nav3">
+            <input type="button" value="시작" id="nav4">
+            <input type="button" value="나가기" id="nav5">
+        </header>
+
+        <div class="gameCenter">
+            <div class="playerListBar">
+                <h5 id="myName"></h5>
+                <div class="playerList"></div>
+                <input type="button" value="이름 변경" onclick="nameChangeBtnClick()">
+
+                <div class="nameChangeBox">
+                    <input class="nameChangeInputBox" type="text" placeholder="원하는 이름을 입력하세요." onkeyup="nameChangeEnterCheck()">
+                    <input class="nameChangeStartBtn" type="button" onclick="nameChangeStartClick()" value="확인">
+                    <input class="nameChangeStartBtn" type="button" onclick="nameChangeCancelClick()" value="취소">
+                </div>
+            </div>
+
+            <div id="gameNow">
+                <h2 id="alert" style="margin-left: 20px; text-shadow: 2px 2px 5px dimgrey;"><span class="turnNow">검정 턴</span><span class="gameTurnTImer"></span></h2>
+                <hr><br>
+                <div id='board'></div>
+            </div>
+
+            <div id="multiPlay">
+                <h5 class="roomInfo">방 목록</h5>
+                <div class="roomList">
+                    <div class="roomSearchMenu">
+                        <input type="text" class="roomSearch">
+                        <button class="roomSearchBtn">검색</button>
+                    </div>
+                    <div class="roomListBox"></div>
+                </div>
+
+                <div class="roomPlayerList"></div>
+
+                <div class="roomCreate">
+                    <input type="text" placeholder="방제목" id="roomNameInput">
+                    <input type="password" placeholder="비밀번호" id="roomPasswdInput">
+                    <button id="roomCreateBtn">만들기</button>
+                    <button id="roomCreateCancel">취소</button>
+                </div>
+            </div>
+
+        </div>
+        
+        <div id="singlePlay">
+            <div id='otherSettingMenu'>
+                <button id='typeBtn' onclick="typeBtnClick()">타입변경</button>
+                <input id='botDelay' type="number" value="1" title="봇 딜레이 시간을 지정해주세요." onfocusout="dataChecker()">
+                <select id="botAIVersion" title="봇의 버전을 변경합니다." onchange="botAIVersionChange(this)">
+                    <option value="0">매우 쉬움(V1)</option>
+                    <option value="1">쉬움(V2)</option>
+                </select>
+            </div>
+
+            <div id='screenShadow' onclick="typeBtnCancel()"></div>
+            <div id='typeChangeBox'>
+                <button class='typeItems' onclick="soloPlay()">혼자하기</button>
+                <button class='typeItems' onclick="duoPlay()">같이하기</button>
+                <button class='typeItems' id='typeCancel' onclick="typeBtnCancel()">취소</button>
+            </div>
+        </div>
+
+        <footer>
+            <div class="chattingList">
+                <h5 class="chattingInfo">채팅</h5>
+                <div class="chattingBox"></div>
+                <div class="chatInput">
+                    <input type="text" placeholder="채팅을 입력하세요." id="myChat" onkeyup="chatSendKeyClick()">
+                    <button id="sendChat" onclick="chatSendClick()">전송</button>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        function typeBtnClick() {
+            document.getElementById('screenShadow').style.display = 'block';
+            document.getElementById('typeChangeBox').style.display = 'block';
+        }
+        
+        function typeBtnCancel() {
+            document.getElementById('screenShadow').style.display = 'none';
+            document.getElementById('typeChangeBox').style.display = 'none';
+        }
+        
+        function soloPlay() {
+            typeBtnCancel();
+            dataClear();
+            gameData.GameType = 2;
+            document.getElementById('botAIVersion').style.display = 'inline';
+        }
+        
+        function duoPlay() {
+            typeBtnCancel();
+            dataClear();
+            gameData.GameType = 1;
+            document.getElementById('botAIVersion').style.display = 'none';
+        }
+
+        function dataChecker() {
+            var item = document.getElementById("botDelay");
+            var value = item.value * 1;
+            if(value < 0) value = 0;
+            item.value = value;
+            botDelay = value;
+        }
+
+        function botAIVersionChange(item) {
+            gameData.BotAIVersion = item.value * 1;
+        }
+
+        function nameChangeBtnClick() {
+            if(!socket.connected)
+                alert("서버에 연결되어 있지 않습니다.");
+            else {
+                document.getElementsByClassName("nameChangeBox")[0].style.display = "block";
+                document.getElementsByClassName('nameChangeInputBox')[0].focus();
+            }
+        }
+
+        function nameChangeStartClick() {
+            var newName = document.getElementsByClassName('nameChangeInputBox')[0].value;
+            if(newName.length < 2 | newName.length > 12)
+                alert("이름은 2글자 이상 12글자 이하여야 합니다.");
+            else {
+                nameChangePacketSend(newName);
+                document.getElementsByClassName("nameChangeBox")[0].style.display = "none";
+                document.getElementsByClassName("nameChangeInputBox")[0].value = "";
+            }
+        }
+
+        function nameChangeCancelClick() {
+            document.getElementsByClassName("nameChangeBox")[0].style.display = "none";
+        }
+
+        function singleModeChange() {
+            document.getElementById("gameNow").style.display = "block";
+            document.getElementById("singlePlay").style.display = "block";
+            document.getElementById("multiPlay").style.display = "none";
+            document.getElementById("nav3").style.display = "none";
+            document.getElementById("nav4").style.display = "none";
+            document.getElementById("nav5").style.display = "none";
+
+            document.getElementsByClassName("turnNow")[0].style.color = "black";
+
+            if(roomName.length >= 1)
+                roomQuitSendPacket();
+        }
+
+        function multiModeChange() {
+            if(!socket.connected)
+                alert("서버에 연결되어 있지 않습니다.");
+            else {
+                document.getElementById("gameNow").style.display = "none";
+                document.getElementById("singlePlay").style.display = "none";
+                document.getElementById("multiPlay").style.display = "block";
+                document.getElementById("boardMenu").style.display = "none";
+                document.getElementById("nav3").style.display = "inline-block";
+                document.getElementById("nav4").style.display = "none";
+                document.getElementById("nav5").style.display = "none";
+                
+                dataClear();
+
+                if(roomName.length >= 1)
+                    roomQuitSendPacket();
+            }
+        }
+
+        var chatSendClick = () => {
+            var chat = document.getElementById("myChat").value;
+            if(chat.length == 0)
+                alert("채팅 내용을 입력하세요.");
+            else {
+                chatPacketSend(chat);
+                document.getElementById("myChat").value = "";
+            }
+        }
+
+        var nameChangeEnterCheck = () => {
+            if(window.event.keyCode == 13) {
+                document.getElementsByClassName('nameChangeStartBtn')[0].click();
+            }
+        }
+
+        var chatSendKeyClick = () => {
+            if(window.event.keyCode == 13) {
+                var chat = document.getElementById("myChat").value;
+                if(chat.length == 0)
+                    alert("채팅 내용을 입력하세요.");
+                else {
+                    chatPacketSend(chat);
+                    document.getElementById("myChat").value = "";
+                }
+            }
+        }
+
+        document.getElementById("nav3").onclick = () => {
+            var item = document.getElementsByClassName('roomCreate')[0];
+            item.style.display = "block";
+            document.getElementById('roomNameInput').focus();
+            if(roomName.length > 1) {
+                document.getElementById('roomCreateBtn').innerHTML = "설정";
+                document.getElementById('roomNameInput').value = roomName;
+                document.getElementById('roomPasswdInput').value = password;
+            }else {
+                document.getElementById('roomCreateBtn').innerHTML = "만들기";
+                document.getElementById('roomNameInput').value = "";
+                document.getElementById('roomPasswdInput').value = "";
+            }
+        }
+
+        document.getElementById("roomCreateBtn").onclick = () => {
+            var val = document.getElementById('roomNameInput').value;
+            
+            if(val.length < 1 | val.length > 12)
+                alert("방 이름은 1글자 이상 12글자 이하여야 합니다.");
+            else
+                roomCreateSendPacket(val, document.getElementById('roomPasswdInput').value);
+        }
+
+        document.getElementById("roomCreateCancel").onclick = () => {
+            document.getElementById('roomNameInput').value = "";
+            document.getElementsByClassName('roomCreate')[0].style.display = "none";
+        }
+        
+        document.getElementById("roomNameInput").onkeyup = () => {
+            if(window.event.keyCode == 13) {
+                document.getElementById("roomCreateBtn").click();
+            }
+        }
+
+        document.getElementsByClassName('roomSearchBtn')[0].onclick = () => {
+            roomSearch(document.getElementsByClassName('roomSearch')[0].value);
+        }
+
+        document.getElementsByClassName('roomSearch')[0].onkeyup = () => {
+            if(window.event.keyCode == 13) {
+                document.getElementsByClassName("roomSearchBtn")[0].click();
+            }
+        }
+
+        document.getElementById("nav4").onclick = () => {
+            readyStatusSendPacket();
+        }
+
+        document.getElementById("nav5").onclick = () => {
+            if(roomName.length >= 1) {
+                roomQuitSendPacket();
+            }
+        }
+
+    </script>
+</body>
+</html>
