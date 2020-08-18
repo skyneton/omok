@@ -1,0 +1,18 @@
+@media(max-width: 768px) {
+    #board > div {
+        font-size: 45px;
+    }
+
+    #typeBtn {
+        font-size: 20px;
+    }
+
+    #botDelay {
+        font-size: 25px;
+    }
+
+    #botAIVersion {
+        width: 180px;
+        font-size: 25px;
+    }
+}
