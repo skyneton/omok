@@ -7,14 +7,9 @@ window.onload = function() {
 
 var omocBoardSet = (() => {
 
-    var w = 50, h = 50;
-
-    document.getElementById('board').style.width = w*width+"px";
-    document.getElementById('board').style.height = h*height+"px";
-
     for(var y = 0; y < height; y++) {
         for(var x = 0; x < width; x++) {
-            document.getElementById('board').innerHTML += "<div style=\"width: "+w+"px; height: "+h+"px; top: "+((y*h)/(h*height) * 100)+"%; left: "+(x/width * 100)+"%;\" id='item_"+y+"_"+x+"' onclick='boardClick("+x+","+y+")'></div>"
+            document.getElementById('board').innerHTML += "<div style=\"width: "+100/width+"%; height: "+100/height+"%; top: "+(y/height * 100)+"%; left: "+(x/width * 100)+"%;\" id='item_"+y+"_"+x+"' onclick='boardClick("+x+","+y+")'></div>"
         }
     }
 });

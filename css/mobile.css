@@ -5,45 +5,32 @@
         border: 3px black solid;
         position: relative;
         align-items: center;
+        height: 350px;
+        width: 350px;
     }
     
     html {
-        overflow-x: hidden;
         background-color: #E4CDD4;
-        width: 100%;
-        height: 100%;
-    }
-    
-    body {
-        overflow: auto;
     }
 
     #board > div {
-        font-size: 45px;
-    }
-
-    #otherSettingMenu {
-        display: flex;
-        margin: auto;
-        padding: 35px 0;
-        justify-content: center;
-        align-content: center;
-        width: 95%;
+        font-size: 15px;
+        background-size: cover;
     }
 
     #typeBtn {
-        font-size: 17px;
-        width: 130px;
+        font-size: 15px;
+        width: 25%;
     }
 
     #botDelay {
-        font-size: 25px;
-        width: 30px;
+        font-size: 20px;
+        width: 10%;
     }
 
     #botAIVersion {
-        width: 160px;
-        font-size: 25px;
+        width: 30%;
+        font-size: 15px;
     }
 
     #typeChangeBox {
@@ -61,68 +48,38 @@
         box-shadow: 6px 6px 5px 7px black;
     }
     
-    #screenShadow {
-        display: none;
-        width: 100%;
-        height: 100%;
-        background-color: black;
-        opacity: 0.8;
-        left: 0;
-        top: 0;
-        position: fixed;
-        top: 0%;
-    }
-    
     .typeItems {
-        display: block;
         height: 40px;
         width: 60%; 
         background-color: #f8aac2;
         color: black;
-        margin-left: auto;
-        margin-right: auto;
         font-size: 15px;
     }
     
     #typeCancel {
-        display: block;
-        margin-top: 30%;
+        margin-top: 100px;
         background-color: #E0E3DA;
     }
     
     #myName {
-        display: block;
-        width: 70px;
-        padding: 5px;
-        height: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        width: 80%;
         text-align: center;
-        background-color: #dddddd;
-        border-radius: 2px;
-        overflow: hidden;
-        align-items: center;
         font-size: 12px;
     }
     
     body > div {
         width: 100%;
-        margin: auto;
-        margin-top: 60px;
         background-color: rgb(245, 245, 245);
-        padding-bottom: 20px;
-        margin-bottom: 15px;
     }
     
     #roomNameInput, #roomPasswdInput, #roomCreateBtn, #roomCreateCancel {
-        display: block;
         width: 60%;
-        margin:  15px auto;
         height: 40px;
-        border-radius: 12px;
-        outline: 0;
     }
     
     #roomCreateBtn {
-        margin-top: 70px;
         display: block;
         height: 40px;
         width: 60%; 
@@ -134,72 +91,56 @@
         color: black;
         margin:  15px auto;
     }
+
+    .roomListBox {
+        height: 300px;
+    }
     
     .roomListItem {
-        display: inline-block;
-        width: 100%;
-        height: 100%;
-        border: 2px solid black;
-        border-radius: 20px;
-        padding-left: 10px;
-        padding-right: 10px;
-        margin: 12px;
+        display: block;
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto;
     }
     
     .roomPlayerBox {
-        display: inline-block;
-        width: 240px;
-        height: 33%;
-        border: 2px solid black;
-        border-radius: 20px;
-        margin-left: 23px;
-        margin-top: 5px;
+        width: 100px;
+        height: 100px;
+        margin: 5px;
     }
     
     .roomCreate {
-        padding-top: 15px;
-        display: none;
-        position: fixed;
         height: 320px;
         width: 60%;
         border: solid #c577a5 2px;
-        background-color: white;
-        border-radius: 7px;
-        box-shadow: 2px 2px 2px 1px black;
-        top: 20%;
-        left: 0;
-        right: 0;
-        margin: auto;
     }
     
     .gameCenter {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 10px;
-        height: 270px;
-    }
-    
-    #alert {
-        margin-top: 5;
+        display: block;
+        padding-left: 0;
+        width: 100%;
     }
     
     .playerListBar {
-        display: flex;
-        margin-right: 0;
-        flex-direction: column;
-        justify-content: center;
-        width: 70px;
+        margin: 0 auto;
+        width: 90%;
         margin-top: 1px;
+        margin-bottom: 30px;
+    }
+
+    .playerListBar > input[type="button"] {
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto;
     }
     
     .playerList {
         height: 100px;
         margin-bottom: 30px;
-        width: 120px;
-        padding: 0 5px;
-        overflow-y: auto;
-        overflow-x: hidden;
+        width: 80%;
+        padding: 0 20px;
+        margin-left: auto;
+        margin-right: auto;
     }
     
     .chattingList {
@@ -207,197 +148,71 @@
     }
     
     .chat_sender {
-        display: inline-block;
-        font-weight: bold;
-        font-size: 12px;
-        text-align: center;
-        margin-right: 20px;
-        width: 100%;
-        overflow: hidden;
-    }
-    
-    .chat_list_item {
-        display: flex;
-        align-items: flex-start;
-        margin-bottom: 5px;
+        width: 200px;
     }
     
     .chat_message {
-        display: inline-block;
-        font-size: 12px;
         width: 100%;
-        word-break: break-all;
     }
     
     .chat_time {
-        display: inline-block;
-        font-size: 12px;
-        color: rgb(168, 168, 168);
-        text-align: center;
-        width: 100%;
-        overflow: hidden;
+        width: 200px;
     }
     
     .chattingInfo {
         width: 95%;
-        padding: 5px;
-        padding-left: 10px;
-        height: 15px;
-        background-color: #dddddd;
-        border-radius: 10px;
-        align-items: center;
-        margin: 5px auto;
     }
     
     .roomInfo {
-        align-items: center;
+        margin: 0 auto;
         margin-bottom: 5px;
-        margin-left: 23px;
-        width: 230px;
-        padding: 5px;
-        padding-left: 10px;
-        height: 15px;
-        background-color: #dddddd;
-        border-radius: 10px;
-    }
-    
-    .roomSearchMenu {
-        display: flex;
-        align-items: center;
-        width: 150px;
-        padding-left: 115px;
+        width: 95%;
     }
     
     .roomSearch {
-        display: block;
-        margin-left: 10%;
-        width: 500%;
-        height: 23px;
-        margin-right: 0;
-        border-right: 0;
-        border-radius: 10px 0 0 10px;
-        padding-left: 8px;
-        outline: 0;
+        margin-left: 10px;
+        width: 80%;
     }
     
     #multiPlay {
-        margin-right: 15px;
-        height: 250px;
-    }
-    
-    .roomList {
-        margin-right: 5px;
-    }
-    
-    .roomListBox {
-        height: 500px;
-        overflow-y: auto;
+        margin-right: 0;
+        padding: 19px;
     }
     
     .roomSearchBtn {
-        margin-left: 0;
-        border-left: 0;
-        width: 300px;
-        height: 23px;
-        border-radius: 0 10px 10px 0;
-        outline: 0;
-    }
-    
-    *::-webkit-scrollbar {
-        width: 100%;
-        height: 8px;
-    }
-    
-    *::-webkit-scrollbar-thumb {
-        border-radius: 3px;
-        background-color: rgba(24, 24, 24, 0.3);
+        width: 20%;
     }
     
     #myChat {
-        width: 100%;
-        border-right: none;
-        border-radius: 8px 0 0 8px;
-        height: 35px;
+        width: 80%;
     }
     
     #sendChat {
-        width: 30%;
+        width: 20%;
         border-left: none;
         border-radius: 0 8px 8px 0;
         height: 35px;
     }
     
-    #myChat:focus, #sendChat:focus {
-        outline: 0;
-    }
-    
-    .chattingBox {
-        overflow-y: auto;
-        height: 150px;
-        margin-bottom: 15px;
-    }
-    
     .chatInput {
-        display: flex;
         width: 100%;
-        align-items: center;
-        margin: auto;
     }
-    
-    .playerListItem {
-        height: 18px;
-        font-size: 12px;
-        margin: 0;
+
+    .chattingBox {
+        height: 150px;
     }
     
     .nameChangeBox {
-        display: none;
-        position: fixed;
-        align-items: center;
-        margin-left: auto;
-        margin-right: auto;
         top: 20%;
         left: 0;
         right: 0;
-        border: 2px black solid;
-        width: 60%;
-        height: 140px;
-        border-radius: 3px;
+        width: 310px;
+        height: 200px;
         background-color: white;
-        box-shadow: 1px 3px 5px 2px black;
-        z-index: 2;
-    }
-    
-    header > input[type="button"] {
-        border: 0;
-        position: relative;
-        border-radius: 8px 8px 0px 0px;
-        height: 30px;
-        margin-bottom: 40px;
-    }
-    
-    header {
-        height: 40px;
-        display: flex;
-        position: absolute;
-        align-items: flex-end;
-    }
-    
-    header input:hover {
-        height: 40px;
-    }
-    
-    header input:focus {
-        outline: 0;
-    }
-    
-    header input:active {
-        color: white;
     }
     
     #nav1 {
         background-color: rgb(141, 86, 139);
-        margin-bottom: 40px;
     }
     #nav2 {
         background-color: #CA9EB8;
@@ -406,101 +221,22 @@
         background-color: #E0E3DA;
     }
     #nav4 {
-        display: none;
         background-color: rgb(186, 197, 213);
     }
     #nav5 {
-        display: none;
         background-color: rgb(204, 149, 175);
-    }
-    #singlePlay {
     }
     
     .nameChangeInputBox {
-        display: block;
-        margin: auto;
-        margin-top: 10px;
-        margin-bottom: 10px;
-        width: 70%;
-        height: 50px;
-        border-radius: 5px;
-        background-color: rgb(236, 236, 236);
-        outline: 0;
+        margin-top: 20px;
+        width: 80%;
+        margin-bottom: 40px;
     }
     
     .nameChangeStartBtn {
-        display: block;
-        margin: auto;
-        width: 70%;
+        width: 80%;
         height: 27px;
-        border-radius: 5px;
-        margin-top: 3px;
+        margin-top: 10px;
         background-color: #f8aac2;
     }
-    
-    .gameTurnTimer {
-        float: right;
-        margin-right: 10px;
-        color: orange;
-    }
-    
-
-    /* html{
-        background-color:#E4CDD4;
-        -webkit-text-size-adjust: auto;
-    }
-    #nav1 {
-        background-color: rgb(141, 86, 139);
-    }
-    #nav2 {
-        background-color: #CA9EB8;
-    }
-    #nav3 {
-        background-color: #E0E3DA;
-    }
-    #nav4 {
-        display: none;
-        background-color:rgb(186, 197, 213);
-    }
-    #nav5 {
-        display: none;
-        background-color: rgb(204, 149, 175);
-    }
-    .nameChangeInputBox {
-        display: block;
-        margin: auto;
-        margin-top: 10px;
-        margin-bottom: 10px;
-        width: 300px;
-        height: 50px;
-        border-radius: 5px;
-        background-color: rgb(243, 243, 243);
-        outline: 0;
-    }
-    
-    .nameChangeStartBtn {
-        display: block;
-        margin: auto;
-        width: 300px;
-        height: 27px;
-        border-radius: 5px;
-        margin-top: 3px;
-        background-color: #E4CDD4;
-    }
-
-    .nameChangeBox {
-        display: none;
-        position: fixed;
-        top: 20%;
-        left: 0;
-        right: 0;
-        margin: auto;
-        border: 2px black solid;
-        width: 350px;
-        height: 140px;
-        border-radius: 3px;
-        background-color: #e9e9e9;
-        box-shadow: 1px 3px 5px 2px black;
-        z-index: 2;
-    }*/
 } 

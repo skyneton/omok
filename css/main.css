@@ -7,6 +7,8 @@
     margin: auto;
     border: 3px black solid;
     position: relative;
+    width: 750px;
+    height: 750px;
 }
 
 html {
@@ -180,7 +182,7 @@ body > div {
 }
 
 #alert {
-    margin-top: 5;
+    margin-top: 5px;
 }
 
 .playerListBar {
@@ -311,14 +313,14 @@ body > div {
 
 #myChat {
     width: 900px;
-    border-right: none;
+    border-right: 0;
     border-radius: 8px 0 0 8px;
     height: 35px;
 }
 
 #sendChat {
     width: 50px;
-    border-left: none;
+    border-left: 0;
     border-radius: 0 8px 8px 0;
     height: 35px;
 }
@@ -405,8 +407,6 @@ header input:active {
 #nav5 {
     display: none;
     background-color: tomato;
-}
-#singlePlay {
 }
 
 .nameChangeInputBox {
