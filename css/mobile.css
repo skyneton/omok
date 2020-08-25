@@ -70,6 +70,7 @@
     }
     
     body > div {
+        margin: 60px 0 20px 0;
         width: 100%;
         background-color: rgb(245, 245, 245);
     }
@@ -118,6 +119,7 @@
     .gameCenter {
         display: block;
         padding-left: 0;
+        padding-right: 0;
         width: 100%;
     }
     
