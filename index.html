@@ -246,6 +246,12 @@
         
         document.getElementById("roomNameInput").onkeyup = () => {
             if(window.event.keyCode == 13) {
+                document.getElementById("roomPasswdInput").focus();
+            }
+        }
+        
+        document.getElementById("roomPasswdInput").onkeyup = () => {
+            if(window.event.keyCode == 13) {
                 document.getElementById("roomCreateBtn").click();
             }
         }
