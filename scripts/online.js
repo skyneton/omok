@@ -31,15 +31,18 @@ var roomAdminChange = (_roomName, _password) => {
     password = _password;
 
     document.getElementById("nav3").style.display = "inline-block";
+    document.getElementById("nav4").style.display = "inline-block";
     document.getElementById("nav3").value = "방 설정";
     document.getElementById("nav4").value = "시작";
 }
 
-var clickToOnlineXY = ((x, y, turn) => {
+var clickToOnlineXY = ((x, y, turn, noSound = false) => {
     var item = document.getElementById("item_"+y+"_"+x);
 
-    audio.currentTime = 0;
-    audio.play();
+    if(!noSound) {
+        audio.currentTime = 0;
+        audio.play();
+    }
     
     switch(turn) {
         case 0:
@@ -81,6 +84,7 @@ var connectRoom = (_roomName) => {
     document.getElementById("nav4").style.display = "inline-block";
     document.getElementById("nav4").value = "준비";
     document.getElementById("nav5").style.display = "inline-block";
+    document.getElementById("speactor").style.display = "inline-block";
     document.getElementsByClassName("roomPlayerList")[0].style.display = "block";
 }
 
@@ -95,6 +99,7 @@ var leaveRoom = () => {
     document.getElementById("nav3").value = "방 만들기";
     document.getElementById("nav4").style.display = "none";
     document.getElementById("nav5").style.display = "none";
+    document.getElementById("speactor").style.display = "none";
     document.getElementsByClassName("roomPlayerList")[0].innerHTML = "";
     document.getElementsByClassName("roomPlayerList")[0].style.display = "none";
 }
@@ -146,6 +151,10 @@ var playerListNameChange = (oldName, newName) => {
 
 var nameChangePacketSend = (newName) => {
     socket.emit('nameChange', newName);
+}
+
+var spectorModeSendPacket = () => {
+    socket.emit('speactorModeChange');
 }
 
 var boardClickSendPacket = (x, y) => {

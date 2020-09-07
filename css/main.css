@@ -156,6 +156,7 @@ body > div {
     height: 150px;
     border: 2px solid black;
     border-radius: 20px;
+    margin: 5px;
 }
 
 .roomCreate {
@@ -407,6 +408,10 @@ header input:active {
 #nav5 {
     display: none;
     background-color: tomato;
+}
+#speactor {
+    display: none;
+    background-color: lightsalmon;
 }
 
 .nameChangeInputBox {

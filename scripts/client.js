@@ -1,4 +1,5 @@
 var socket = io.connect("https://skyneton-omoc.herokuapp.com/");
+//var socket = io.connect("http://127.0.0.1:3000");
 
 socket.on('connect', () => {
     console.log("소켓 연결 성공");
@@ -131,6 +132,34 @@ socket.on('readyStatusChange', (data) => {
     }
 });
 
+socket.on('speactorModeChange', (data) => {
+    var item = document.getElementById('roomPlayerItem_'+data.playerName);
+    if(item != null) {
+        if(!data.speactor) {
+            if(data.ready) {
+                item.lastChild.style.color = "aqua";
+                item.lastChild.innerHTML = "준비";
+            }else {
+                item.lastChild.style.color = "gray";
+                item.lastChild.innerHTML = "준비중";
+            }
+        }else {
+            item.lastChild.style.color = "blue";
+            item.lastChild.innerHTML = "관전";
+        }
+    }
+});
+
+socket.on('speactorChangeMe', (data) => {
+    if(data.speactor) {
+        if(data.admin) {
+            document.getElementById("nav4").style.display = "inline-block";
+        }else
+            document.getElementById("nav4").style.display = "none";
+    }else
+        document.getElementById("nav4").style.display = "inline-block";
+});
+
 socket.on('message', (data) => {
     chattingMessageGet(data.sender, data.message);
 });
@@ -163,6 +192,7 @@ socket.on('gameStart', () => {
     document.getElementById("nav2").style.display = "none";
     document.getElementById("nav3").style.display = "none";
     document.getElementById("nav4").style.display = "none";
+    document.getElementById("speactor").style.display = "none";
 
     document.getElementById("multiPlay").style.display = "none";
     document.getElementById("gameNow").style.display = "block";
@@ -181,8 +211,13 @@ socket.on('otherTurnNow', () => {
     document.getElementsByClassName("turnNow")[0].innerHTML = "상대 턴";
 });
 
+socket.on('WhoTurnNow', (data) => {
+    document.getElementsByClassName("turnNow")[0].style.color = "gray";
+    document.getElementsByClassName("turnNow")[0].innerHTML = data;
+});
+
 socket.on('boardClick', (data) => {
-    clickToOnlineXY(data.x, data.y, data.turn);
+    clickToOnlineXY(data.x, data.y, data.turn, data.noSound);
 });
 
 socket.on('gameEnd', () => {

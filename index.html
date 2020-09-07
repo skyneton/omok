@@ -20,6 +20,7 @@
             <input type="button" value="멀티 플레이" id="nav2" onclick="multiModeChange()">
             <input type="button" value="방 만들기" id="nav3">
             <input type="button" value="시작" id="nav4">
+            <input type="button" value="관전" id="speactor">
             <input type="button" value="나가기" id="nav5">
         </header>
 
@@ -162,6 +163,7 @@
             document.getElementById("nav3").style.display = "none";
             document.getElementById("nav4").style.display = "none";
             document.getElementById("nav5").style.display = "none";
+            document.getElementById("speactor").style.display = "none";
 
             document.getElementsByClassName("turnNow")[0].style.color = "black";
 
@@ -179,6 +181,7 @@
                 document.getElementById("nav3").style.display = "inline-block";
                 document.getElementById("nav4").style.display = "none";
                 document.getElementById("nav5").style.display = "none";
+                document.getElementById("speactor").style.display = "none";
                 
                 dataClear();
 
@@ -273,6 +276,12 @@
         document.getElementById("nav5").onclick = () => {
             if(roomName.length >= 1) {
                 roomQuitSendPacket();
+            }
+        }
+
+        document.getElementById("speactor").onclick = () => {
+            if(roomName.length >= 1) {
+                spectorModeSendPacket();
             }
         }
 
