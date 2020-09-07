@@ -84,6 +84,9 @@ var clickToXY = ((x, y) => {
             }, 100);
 
         }else {
+            
+            placeStone(x+1, y+1, gameData.NowTurn);
+
             gameData.TurnChange(document.getElementsByClassName('turnNow')[0]);
 
             if(gameData.GameType == 2) {
@@ -91,8 +94,14 @@ var clickToXY = ((x, y) => {
                     targetBoardArray[targetBoardArray.length] = x+"_"+y;
                     if(gameData.BotAIVersion == 0)
                         botAIEasy(x, y);
-                    else
+                    else if(gameData.BotAIVersion == 1)
                         botAINormal(x, y);
+                    else {
+                        setTimeout(function() {
+                            let point = auto();
+                            clickToXY(point.x - 1, point.y - 1);
+                        }, botDelay * 1000);
+                    }
                 }
             }
         }
@@ -109,6 +118,7 @@ var dataClear = (() => {
     meBoardArray = [];
 
     omocBoardClear();
+    gameBoard = board();
 })
 
 var gameClearCheck = ((x, y) => {
