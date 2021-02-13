@@ -229,5 +229,5 @@ socket.on('gameEnd', () => {
     document.getElementById("multiPlay").style.display = "block";
     document.getElementById("gameNow").style.display = "none";
 
-    omocBoardClear();
+    omokBoardClear();
 });

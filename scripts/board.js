@@ -2,10 +2,10 @@ var height = 15;
 var width = 15;
 
 window.onload = function() {
-    omocBoardSet();
+    omokBoardSet();
 }
 
-var omocBoardSet = (() => {
+var omokBoardSet = (() => {
 
     for(var y = 0; y < height; y++) {
         for(var x = 0; x < width; x++) {
@@ -14,7 +14,7 @@ var omocBoardSet = (() => {
     }
 });
 
-var omocBoardClear = (() => {
+const omokBoardClear = (() => {
     for(var y = 0; y < height; y++) {
         for(var x = 0; x < width; x++) {
             document.getElementById("item_"+y+"_"+x).innerText = "";

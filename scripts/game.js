@@ -117,7 +117,7 @@ var dataClear = (() => {
     targetBoardArray = [];
     meBoardArray = [];
 
-    omocBoardClear();
+    omokBoardClear();
     gameBoard = board();
 })
 
