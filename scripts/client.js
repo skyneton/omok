@@ -1,5 +1,5 @@
-var socket = io.connect("https://skyneton-omoc.herokuapp.com/");
-//var socket = io.connect("http://127.0.0.1:3000");
+const socket = io.connect("https://skyneton-omoc.herokuapp.com/");
+// var socket = io.connect("http://127.0.0.1:3000");
 
 socket.on('connect', () => {
     console.log("소켓 연결 성공");
@@ -79,13 +79,13 @@ socket.on('leaveRoomPlayer', (data) => {
 });
 
 socket.on('changeRoom', (data) => {
-    roomList[data.newName] = {'roomName': data.newName, 'len': roomList[data.oldName].len, 'password': data.password };
-    delete roomList[data.oldName];
-
     var item = document.getElementById('roomListItem_'+data.oldName);
     if(item != null) {
         item.innerHTML = data.newName;
         item.id = 'roomListItem_'+data.newName;
+        item.onclick = () => {
+            joinRoom(data.newName);
+        };
     }
 });
 

@@ -1,9 +1,6 @@
-var playerName = "";
-var roomList = new Array();
-var roomName = "";
+let playerName = "";
+let roomName = "";
 var password = "";
-
-var search = "";
 
 var playerNameChange = (_playerName) => {
     playerName = _playerName;
@@ -56,22 +53,32 @@ var clickToOnlineXY = ((x, y, turn, noSound = false) => {
     }
 });
 
+const whoJoinRoom = roomName => {
+
+};
+
+const whoQuitRoom = roomName => {
+
+};
+
 var roomCreate = (_roomName, _password, _member = 0) => {
-    roomList[_roomName] = { 'roomName': _roomName, 'len': _member, 'password': _password };
+    const target = document.getElementsByClassName('roomListBox')[0];
+    const search = document.getElementsByClassName("roomSearch")[0].value;
 
-    if(search.length >= 1) {
-        if(_roomName.includes(search)) {
-            var item = document.getElementsByClassName('roomListBox')[0];
-            item.innerHTML = "<div class='roomListItem' id='roomListItem_"+_roomName+"' onclick=\"joinRoom('"+_roomName+"')\">"+_roomName+"</div>" + item.innerHTML;
-        }
-    }else {
-        var item = document.getElementsByClassName('roomListBox')[0];
-        item.innerHTML = "<div class='roomListItem' id='roomListItem_"+_roomName+"' onclick=\"joinRoom('"+_roomName+"')\">"+_roomName+"</div>" + item.innerHTML;
+    const item = document.createElement("div");
+    item.setAttribute("class", "roomListItem");
+    item.setAttribute("id", `roomListItem_${_roomName}`);
+    item.innerHTML = _roomName;
+
+    item.onclick = () => {
+        joinRoom(_roomName);
+    };
+
+    if(search.length >= 1 && _roomName.includes(search) || search.length == 0) {
+        item.setAttribute("show", true);
     }
-}
 
-var whoJoinRoom = (_roomName) => {
-    roomList[_roomName].len++;
+    target.insertBefore(item, target.firstElementChild);
 }
 
 var connectRoom = (_roomName) => {
@@ -104,30 +111,23 @@ var leaveRoom = () => {
     document.getElementsByClassName("roomPlayerList")[0].style.display = "none";
 }
 
-var whoQuitRoom = (_roomName) => {
-    roomList[_roomName].len--;
-}
-
-var roomSearch = (_search) => {
-    search = _search;
-    var item = document.getElementsByClassName('roomListBox')[0];
-    item.innerHTML = "";
+var roomSearch = (search) => {
+    const items = document.getElementsByClassName('roomListBox')[0].children;
     
-    for(var key in roomList) {
-        if(search.length >= 1) {
-            if(roomList[key].roomName.includes(search))
-                item.innerHTML = "<div class='roomListItem' id='roomListItem_"+roomList[key].roomName+"' onclick=\"joinRoom('"+roomList[key].roomName+"')\">"+roomList[key].roomName+"</div>" + item.innerHTML;
-        }else
-            item.innerHTML = "<div class='roomListItem' id='roomListItem_"+roomList[key].roomName+"' onclick=\"joinRoom('"+roomList[key].roomName+"')\">"+roomList[key].roomName+"</div>" + item.innerHTML;
+    for(let i = 0; i < items.length; i++) {
+        const name = items[i].innerText;
+        if(search.length >= 1 && name.includes(search) || search.length <= 0) {
+            items[i].setAttribute("show", true);
+        }else if(items[i].hasAttribute("show")) {
+            items[i].removeAttribute("show");
+        }
     }
 }
 
 var roomDelete = (_roomName) => {
-    delete roomList[_roomName];
-
-    var item = document.getElementById('roomListItem_'+_roomName);
+    const item = document.getElementById('roomListItem_'+_roomName);
     if(item != null) {
-        document.getElementsByClassName('roomListBox')[0].removeChild(item);
+        item.remove();
     }
 }
 
