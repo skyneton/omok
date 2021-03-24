@@ -63,9 +63,10 @@ socket.on('roomPlayerList', (data) => {
 });
 
 socket.on('roomPasswdPls', (data) => {
-    var pw = prompt("비밀번호를 입력해 주세요.");
-    if(pw != null && pw != '')
-        joinRoom(data, pw);
+    prompt("비밀번호를 입력해 주세요.", null, "password").then(pw => {
+        if(pw != null && pw != '')
+            joinRoom(data, pw);
+    });
 });
 
 socket.on('joinRoomPlayer', (data) => {

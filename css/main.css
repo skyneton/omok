@@ -2,6 +2,50 @@
 #boardMenu { display: none; }
 #singlePlay { display: none; }
 
+.alert, .prompt, .confirm {
+    position: fixed;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 400px;
+    min-width: 150px;
+    width: 80vw;
+    z-index: 100;
+    left: 0;
+    right: 0;
+    top: 4px;
+    background-color: white;
+    box-shadow: 0px 0px 4px black;
+    border-radius: 4px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+}.al_okbtn {
+    color: white;
+    background-color: rgb(0, 81, 255);
+    margin-top: 20px;
+    border: 1px solid blue;
+    border-radius: 3px;
+    width: 50px;
+    height: 30px;
+    align-self: flex-end;
+}.al_buttonBox {
+    align-self: flex-end;
+}.al_cancelbtn {
+    color: rgb(0, 81, 255);
+    background-color: white;
+    margin-top: 20px;
+    border: 1px solid gray;
+    border-radius: 3px;
+    width: 50px;
+    height: 30px;
+    align-self: flex-end;
+    margin-left: 15px;
+}.al_inputBox {
+    height: 20px;
+    margin-top: 15px;
+}
+
+
 
 #board {
     margin: auto;

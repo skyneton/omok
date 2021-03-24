@@ -1,29 +1,29 @@
 let playerName = "";
 let roomName = "";
-var password = "";
+let password = "";
 
-var playerNameChange = (_playerName) => {
+const playerNameChange = (_playerName) => {
     playerName = _playerName;
     document.getElementById('myName').innerHTML = playerName;
 }
 
-var addPlayerList = (name) => {
+const addPlayerList = (name) => {
     document.getElementsByClassName('playerList')[0].innerHTML += "<p class='playerListItem' id='playerListItem_"+name+"'>"+name+"</p>";
 }
 
-var roomCreateSendPacket = (_roomName, _password) => {
+const roomCreateSendPacket = (_roomName, _password) => {
     socket.emit('createRoom', {'roomName': _roomName, 'password': _password});
 }
 
-var roomQuitSendPacket = () => {
+const roomQuitSendPacket = () => {
     socket.emit('leaveRoom');
 }
 
-var joinRoom = (_roomName, _password = null) => {
+const joinRoom = (_roomName, _password = null) => {
     socket.emit('joinRoom', {'roomName': _roomName, 'password': _password});
 }
 
-var roomAdminChange = (_roomName, _password) => {
+const roomAdminChange = (_roomName, _password) => {
     roomName = _roomName;
     password = _password;
 
@@ -33,8 +33,8 @@ var roomAdminChange = (_roomName, _password) => {
     document.getElementById("nav4").value = "시작";
 }
 
-var clickToOnlineXY = ((x, y, turn, noSound = false) => {
-    var item = document.getElementById("item_"+y+"_"+x);
+const clickToOnlineXY = ((x, y, turn, noSound = false) => {
+    const item = document.getElementById("item_"+y+"_"+x);
 
     if(!noSound) {
         audio.currentTime = 0;
@@ -61,7 +61,7 @@ const whoQuitRoom = roomName => {
 
 };
 
-var roomCreate = (_roomName, _password, _member = 0) => {
+const roomCreate = (_roomName, _password, _member = 0) => {
     const target = document.getElementsByClassName('roomListBox')[0];
     const search = document.getElementsByClassName("roomSearch")[0].value;
 
@@ -81,7 +81,7 @@ var roomCreate = (_roomName, _password, _member = 0) => {
     target.insertBefore(item, target.firstElementChild);
 }
 
-var connectRoom = (_roomName) => {
+const connectRoom = (_roomName) => {
     roomName = _roomName;
     password = null;
 
