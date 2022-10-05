@@ -1,4 +1,4 @@
-const socket = io.connect("https://skyneton-omoc.herokuapp.com/");
+const socket = io.connect("https://skyneton-omok.herokuapp.com/");
 // var socket = io.connect("http://127.0.0.1:3000");
 
 socket.on('connect', () => {
