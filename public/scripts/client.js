@@ -1,4 +1,5 @@
-const socket = io.connect("https://skyneton-omok.herokuapp.com/");
+// const socket = io.connect("https://skyneton-omoc.herokuapp.com/");
+const socket = io.connect();
 // var socket = io.connect("http://127.0.0.1:3000");
 
 socket.on('connect', () => {
@@ -99,14 +100,14 @@ socket.on('roomDataChanged', (data) => {
 
 socket.on('joinPlayer', (data) => {
     //data가 방에 들어옴
-    chattingMessageGet("SYSTEM", data+" 님이 방에 입장하였습니다.");
+    chattingMessageGet(`<span style="color:orange">SYSTEM<span>`, data+" 님이 방에 입장하였습니다.");
     var item = document.getElementsByClassName("roomPlayerList")[0];
     item.innerHTML += "<div class='roomPlayerBox' id='roomPlayerItem_"+data+"'><h3>"+data+"</h3><div style='color: gray'>준비중</div></div>";
 });
 
 socket.on('leavePlayer', (data) => {
     //data가 방을 나감
-    chattingMessageGet("SYSTEM", data+" 님이 방에 퇴장하였습니다.");
+    chattingMessageGet(`<span style="color:orange">SYSTEM<span>`, data+" 님이 방에 퇴장하였습니다.");
     var item = document.getElementById('roomPlayerItem_'+data);
     if(item != null)
         document.getElementsByClassName("roomPlayerList")[0].removeChild(item);
@@ -226,7 +227,8 @@ socket.on('gameEnd', () => {
     document.getElementById("nav2").style.display = "inline-block";
     document.getElementById("nav3").style.display = "inline-block";
     document.getElementById("nav4").style.display = "inline-block";
-
+    document.getElementById("speactor").style.display = "inline-block";
+    
     document.getElementById("multiPlay").style.display = "block";
     document.getElementById("gameNow").style.display = "none";
 
